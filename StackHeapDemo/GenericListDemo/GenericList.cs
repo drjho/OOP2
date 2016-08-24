@@ -19,7 +19,7 @@ namespace GenericListDemo
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator) this;
+            return (IEnumerator)this;
         }
 
         public GenericList()
@@ -38,6 +38,38 @@ namespace GenericListDemo
             array = tempArray;
         }
 
+        public void Remove(T value)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (array[i].Equals(value))
+                {
+                    int index = i;
+                    RemoveAt(index);
+                    break;
+                }
+            }
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index >= Count)
+                throw new ArgumentOutOfRangeException();
+            else
+            {
+                var tempArray = new T[Count - 1];
+                for (int i = 0; i < index; i++)
+                {
+                    tempArray[i] = array[i];
+                }
+
+                for (int i = index + 1; i < Count; i++)
+                {
+                    tempArray[i-1] = array[i];
+                }
+                array = tempArray;
+            }
+        }
 
         public T this[int index]
         {
@@ -61,7 +93,8 @@ namespace GenericListDemo
             }
         }
 
-        public int Count {
+        public int Count
+        {
             get
             {
                 if (array == null)
