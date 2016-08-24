@@ -8,15 +8,20 @@ namespace EnumsAttributeExtensionDemo
 {
     enum Group
     {
-        Tiger, Squid, Penguin, Mouse
+        NoGroup, Tiger, Squid, Penguin, Mouse
     }
 
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.All)]
     class AuthorAttribute : Attribute
     {
         public AuthorAttribute(string name)
         {
             Name = name;
+        }
+
+        public override string ToString()
+        {
+            return "Author : " + Name + " GroupName : " + GroupName.ToString() ;
         }
 
         public string Name { get; set; }

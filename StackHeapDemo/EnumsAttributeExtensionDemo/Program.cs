@@ -8,19 +8,46 @@ using ExtensionMethods;
 
 namespace EnumsAttributeExtensionDemo
 {
-    class Program
+    [Author("JH", GroupName = Group.Squid)]
+    public class Program
     {
         static void Main(string[] args)
         {
             StringDemo();
+
+
+            foreach (MethodInfo method in (typeof(Program)).GetMethods())
+            {
+                foreach (object attribute in method.GetCustomAttributes(true))
+                {
+                    if (attribute is AuthorAttribute)
+                    {
+                        Console.WriteLine(attribute.ToString());
+                    }
+                }
+            }
+  
         }
 
         [Author("JH", GroupName = Group.Squid)]
-        static void StringDemo()
+        public static void StringDemo()
         {
             var str = "sluta!";
             Console.WriteLine(str.Shout());
         }
 
+        [Author("Foo")]
+        public static void FooMethod()
+        {
+
+        }
+
+        [Author("Bar")]
+        public static void BarMetod()
+        {
+
+        }
+
     }
+
 }
