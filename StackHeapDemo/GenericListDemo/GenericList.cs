@@ -24,18 +24,26 @@ namespace GenericListDemo
 
         public GenericList()
         {
-            array = new T[0];
+            array = new T[16];
+        }
+
+        void IncreaseCapacity()
+        {
+            var tempArray = new T[array.Length * 2];
+            for (int i = 0; i < array.Length; i++)
+            {
+                tempArray[i] = array[i];
+            }
+            array = tempArray;
         }
 
         public void Add(T value)
         {
-            var tempArray = new T[Count + 1];
-            for (int i = 0; i < Count; i++)
+            if (count + 1 >= array.Length)
             {
-                tempArray[i] = array[i];
+                IncreaseCapacity();
             }
-            tempArray[Count] = value;
-            array = tempArray;
+            array[count++] = value;
         }
 
         public void Remove(T value)
@@ -46,6 +54,7 @@ namespace GenericListDemo
                 {
                     int index = i;
                     RemoveAt(index);
+
                     break;
                 }
             }
@@ -57,17 +66,11 @@ namespace GenericListDemo
                 throw new ArgumentOutOfRangeException();
             else
             {
-                var tempArray = new T[Count - 1];
-                for (int i = 0; i < index; i++)
-                {
-                    tempArray[i] = array[i];
-                }
-
                 for (int i = index + 1; i < Count; i++)
                 {
-                    tempArray[i-1] = array[i];
+                    array[i - 1] = array[i];
                 }
-                array = tempArray;
+                --count;
             }
         }
 
@@ -97,14 +100,11 @@ namespace GenericListDemo
         {
             get
             {
-                if (array == null)
-                    throw new NullReferenceException("internal array has not instantiated.");
-                else
-                {
-                    return array.Length;
-                }
+                return count;
             }
         }
+
+        private int count;
 
         private T[] array;
     }

@@ -57,6 +57,7 @@ namespace GenericListDemo
                 fList.Add((float)Math.Sqrt(i));
             }
 
+            Console.WriteLine($"flist count: {fList.Count}");
 
 
             foreach (var f in fList)
