@@ -38,6 +38,18 @@ namespace GenericListDemo
             {
                 Console.WriteLine(p.Name + " " + p.Age);
             }
+
+            var fList = new GenericList<float>();
+            for (int i = 0; i < 20; i++)
+            {
+                fList.Add((float)Math.Sqrt(i));
+            }
+
+            foreach (var f in fList)
+            {
+                Console.WriteLine(f);
+            }
+
         }
     }
 
