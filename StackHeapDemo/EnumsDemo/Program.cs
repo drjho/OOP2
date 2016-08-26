@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace EnumsDemo
 {
+
     class Program
     {
         static void Main(string[] args)
         {
             PrintUser("Bo", UserLevel.Student);
             PrintUser("Bo", UserLevel.Teacher);
+
+            foreach (UserLevel item in Enum.GetValues(typeof(UserLevel)))
+            {
+                PrintUser("Användare", item);
+            }
         }
 
         static void PrintUser(string name, UserLevel userlevel)
