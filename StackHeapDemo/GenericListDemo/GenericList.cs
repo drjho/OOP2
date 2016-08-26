@@ -66,7 +66,7 @@ namespace GenericListDemo
                 throw new ArgumentOutOfRangeException();
             else
             {
-                for (int i = index + 1; i < Count; i++)
+                for (int i = index + 1; i <= Count; i++)
                 {
                     array[i - 1] = array[i];
                 }
