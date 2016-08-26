@@ -29,12 +29,13 @@ namespace GenericListDemo
 
         void IncreaseCapacity()
         {
-            var tempArray = new T[array.Length * 2];
-            for (int i = 0; i < array.Length; i++)
-            {
-                tempArray[i] = array[i];
-            }
-            array = tempArray;
+            Array.Resize<T>(ref array, array.Length * 2); 
+            //var tempArray = new T[array.Length * 2];
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    tempArray[i] = array[i];
+            //}
+            //array = tempArray;
         }
 
         public void Add(T value)
