@@ -21,10 +21,11 @@ namespace EnumsDemo
     }
 
     // När man använder entity-framworks (mot databas) så blir det en primärnyckel av int-arna.
+    [Flags] // När man har flags måste man använda binära värden så att en user kan ha flera tillhörighet!!!
     enum UserLevel
     {
-        Student = 10,
-        Teacher = 20,
-        Admin = 30
+        Student = 0,
+        Teacher = 2,
+        Admin = 4
     }
 }
