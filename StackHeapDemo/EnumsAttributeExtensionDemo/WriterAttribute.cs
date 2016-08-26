@@ -12,9 +12,9 @@ namespace EnumsAttributeExtensionDemo
     }
 
     [AttributeUsage(AttributeTargets.All)]
-    class AuthorAttribute : Attribute
+    class WrittenByAttribute : Attribute
     {
-        public AuthorAttribute(string name)
+        public WrittenByAttribute(string name)
         {
             Name = name;
         }
@@ -37,6 +37,11 @@ namespace ExtensionMethods
         public static string Shout(this string value)
         {
             return value.ToUpperInvariant();
+        }
+
+        public static string Truncate(this string value, int i)
+        {
+            return value.Substring(0, i) + "...";
         }
     }
 }

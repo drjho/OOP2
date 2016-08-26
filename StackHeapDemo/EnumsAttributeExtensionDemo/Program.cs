@@ -8,7 +8,7 @@ using ExtensionMethods;
 
 namespace EnumsAttributeExtensionDemo
 {
-    [Author("JH", GroupName = Group.Squid)]
+    [WrittenBy("JH", GroupName = Group.Squid)]
     public class Program
     {
         static void Main(string[] args)
@@ -20,29 +20,30 @@ namespace EnumsAttributeExtensionDemo
             {
                 foreach (object attribute in method.GetCustomAttributes(true))
                 {
-                    if (attribute is AuthorAttribute)
+                    if (attribute is WrittenByAttribute)
                     {
-                        Console.WriteLine(attribute.ToString());
+                        var attr = (WrittenByAttribute)attribute;
+                        Console.WriteLine(method.Name + " written by " + attr.Name + " in group " + attr.GroupName);
                     }
                 }
             }
   
         }
 
-        [Author("JH", GroupName = Group.Squid)]
+        [WrittenBy("JH", GroupName = Group.Squid)]
         public static void StringDemo()
         {
             var str = "sluta!";
             Console.WriteLine(str.Shout());
         }
 
-        [Author("Foo")]
+        [WrittenBy("Foo")]
         public static void FooMethod()
         {
 
         }
 
-        [Author("Bar")]
+        [WrittenBy("Bar")]
         public static void BarMetod()
         {
 
