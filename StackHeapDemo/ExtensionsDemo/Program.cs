@@ -17,6 +17,24 @@ namespace ExtensionsDemo
             {
                 Console.WriteLine(random.Percentage(50));
             }
+
+            var o = new
+            {
+                Id = 1,
+                Name = "Pontus",
+                Created = DateTime.Now
+            };
+
+            Console.WriteLine(o.Name);
+
+            var a = new
+            {
+                Age = random.Next(0, 100 + 1),
+                Name = "Bo"
+            };
+
+            Console.WriteLine(a.ToString());
+
         }
     }
 }
