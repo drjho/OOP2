@@ -8,11 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
+using System.Net;
 
 namespace AsyncDemo
 {
     public partial class Form1 : Form
     {
+
+        static string link1 = "http://www.google.com";
+        static string link2 = "http://www.dn.se";
+        static string link3 = "http://www.yahoo.com";
+
+        HttpClient httpClient = new HttpClient();
+        WebClient webClient = new WebClient();
+
+        Uri uri1 = new Uri(link1);
+        Uri uri2 = new Uri(link2);
+        Uri uri3 = new Uri(link3);
 
         public Form1()
         {
@@ -24,11 +36,13 @@ namespace AsyncDemo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = "Reading...";
-            await DownLoadPageAsync("http://www.dn.se");
-            label1.Text = "Done";
+            label1.Text = "WebClient loading " + uri3.AbsoluteUri;
+
+            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler((se, ev) =>
+               { label1.Text = uri3.AbsoluteUri + " Done!"; });
+            webClient.DownloadStringAsync(uri3);
         }
 
         /// <summary>
@@ -38,12 +52,11 @@ namespace AsyncDemo
         /// <param name="e"></param>
         private async void button2_Click(object sender, EventArgs e)
         {
-            List<string> urlList = GetUrlList();
+            label1.Text = "HttpClient loading " + uri3.AbsoluteUri;
 
-            label2.Text = "Reading...";
-            IEnumerable<Task> downloadTasksQuery = from url in urlList select DownLoadPageAsync(url);
-            await Task.WhenAll(downloadTasksQuery);
-            label2.Text = "Done";
+            await httpClient.GetStringAsync(uri3);
+
+            label1.Text = uri3.AbsoluteUri + " Done!";
         }
 
         /// <summary>
@@ -53,43 +66,19 @@ namespace AsyncDemo
         /// <param name="e"></param>
         private async void button3_Click(object sender, EventArgs e)
         {
-            List<string> urlList = GetUrlList();
+            label1.Text = "1by1 loading " + uri1.AbsoluteUri;
+            await httpClient.GetStringAsync(uri1);
+            label1.Text += " done\n " + uri2.AbsoluteUri;
+            await httpClient.GetStringAsync(uri2);
+            label1.Text += " done\n " + uri3.AbsoluteUri;
+            await httpClient.GetStringAsync(uri3);
+            label1.Text += " Done!";
 
-            label3.Text = "Reading...";
-            foreach (var url in urlList)
-            {
-                await DownLoadPageAsync(url);
-            }
-            label3.Text = "Done";
         }
 
-        List<string> GetUrlList()
+        private void button4_Click(object sender, EventArgs e)
         {
-            return new List<string>
-            {
-                "http://msdn.microsoft.com/library/windows/apps/br211380.aspx",
-                "http://msdn.microsoft.com",
-                "http://msdn.microsoft.com/en-us/library/hh290136.aspx",
-                "http://msdn.microsoft.com/en-us/library/ee256749.aspx",
-                "http://msdn.microsoft.com/en-us/library/hh290138.aspx",
-                "http://msdn.microsoft.com/en-us/library/hh290140.aspx",
-                "http://msdn.microsoft.com/en-us/library/dd470362.aspx",
-                "http://msdn.microsoft.com/en-us/library/aa578028.aspx",
-                "http://msdn.microsoft.com/en-us/library/ms404677.aspx",
-                "http://msdn.microsoft.com/en-us/library/ff730837.aspx"
-            };
-        }
 
-        async Task DownLoadPageAsync(string url)
-        {
-            using (var client = new HttpClient())
-            using (HttpResponseMessage response = await client.GetAsync(url))
-            using (HttpContent content = response.Content)
-            {
-                string result = await content.ReadAsStringAsync();
-            }
-            
         }
-
     }
 }
