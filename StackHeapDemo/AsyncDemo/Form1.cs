@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using System.Net;
+using System.Threading;
 
 namespace AsyncDemo
 {
@@ -29,6 +30,7 @@ namespace AsyncDemo
         public Form1()
         {
             InitializeComponent();
+            label1.Text = "Waiting for command...";
         }
 
         /// <summary>
@@ -78,6 +80,8 @@ namespace AsyncDemo
 
         private async void button4_Click(object sender, EventArgs e)
         {
+            label1.Text = "";
+
             try
             {
                 var task1 = httpClient.GetStringAsync(uri1);
@@ -96,9 +100,37 @@ namespace AsyncDemo
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private async void button5_Click(object sender, EventArgs e)
         {
+            label1.Text = "";
+            try
+            {
+                var task1 = httpClient.GetStringAsync(uri1);
+                var task2 = httpClient.GetStringAsync(uri2);
+                var task3 = httpClient.GetStringAsync(uri3);
+                await Task.Factory.StartNew(() =>
+                {
+                    label1.Text = "Loading: \n";
+                    do
+                    {
 
+                        if (task1.IsCompleted)
+                            label1.Text += uri1.AbsoluteUri + " Done\n";
+                        if (task2.IsCompleted)
+                            label1.Text += uri2.AbsoluteUri + " Done\n";
+                        if (task3.IsCompleted)
+                            label1.Text += uri3.AbsoluteUri + " Done\n";
+                        Thread.Sleep(1);
+                    } while (!task1.IsCompleted && !task2.IsCompleted && !task3.IsCompleted);
+
+                });
+                label1.Text = " All done!";
+            }
+            catch (Exception ex)
+            {
+
+                label1.Text = "Could not download HTML...";
+            }
         }
     }
 }
