@@ -76,7 +76,27 @@ namespace AsyncDemo
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var task1 = httpClient.GetStringAsync(uri1);
+                var task2 = httpClient.GetStringAsync(uri2);
+                var task3 = httpClient.GetStringAsync(uri3);
+
+                var results = await Task.WhenAll(task1, task2, task3);
+
+                label1.Text = "Loading " + uri1.AbsoluteUri + uri2.AbsoluteUri + uri3.AbsoluteUri + " all done!";
+
+            }
+            catch (Exception ex)
+            {
+
+                label1.Text = "Could not download HTML...";
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
         {
 
         }
