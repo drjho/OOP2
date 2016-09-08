@@ -93,73 +93,45 @@ namespace AsyncDemo
                 label1.Text = "Loading " + uri1.AbsoluteUri + uri2.AbsoluteUri + uri3.AbsoluteUri + " all done!";
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 label1.Text = "Could not download HTML...";
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private async void button5_Click(object sender, EventArgs e)
         {
             label1.Text = "";
+
             try
             {
-                var c1 = new WebClient();
-                c1.DownloadStringCompleted += new DownloadStringCompletedEventHandler((se, ev) =>
-                { label1.Text += uri3.AbsoluteUri + " Done!\n"; });
-                c1.DownloadStringAsync(uri3);
-                var c2 = new WebClient();
+                var t1 = httpClient.GetStringAsync(uri1);
+                var t2 = httpClient.GetStringAsync(uri2);
+                var t3 = httpClient.GetStringAsync(uri3);
 
-                c2.DownloadStringCompleted += new DownloadStringCompletedEventHandler((se, ev) =>
-                { label1.Text += uri2.AbsoluteUri + " Done!\n"; });
-                c2.DownloadStringAsync(uri2);
-                var c3 = new WebClient();
+                List<Task<string>> tasks = new List<Task<string>>() { t1, t2, t3 };
 
-                c3.DownloadStringCompleted += new DownloadStringCompletedEventHandler((se, ev) =>
-                { label1.Text += uri1.AbsoluteUri + " Done!\n"; });
-                c3.DownloadStringAsync(uri1);
+                while (tasks.Count > 0)
+                {
+                    Task<string> finishedTask = await Task.WhenAny(tasks);
+                    tasks.Remove(finishedTask);
+                    if (finishedTask.Equals(t1))
+                        label1.Text += uri1.AbsoluteUri;
+                    else if (finishedTask.Equals(t2))
+                        label1.Text += uri2.AbsoluteUri;
+                    else if (finishedTask.Equals(t3))
+                        label1.Text += uri3.AbsoluteUri;
+                    label1.Text += " done \n";
+                }
+
             }
+
             catch (Exception)
             {
+
                 label1.Text = "Could not download HTML...";
             }
-
-            //try
-            //{
-            //    List<Task<string>> tasks = new List<Task<string>>();
-
-            //    tasks.Add(httpClient.GetStringAsync(uri1));
-            //    tasks.Add(httpClient.GetStringAsync(uri2));
-            //    tasks.Add(httpClient.GetStringAsync(uri3));
-            //    while (tasks.Count > 0)
-            //    {
-            //        Task<string> finishedTask = await Task.WhenAny(tasks);
-                    
-            //        tasks.Remove(finishedTask);
-                    
-            //        //switch (index)
-            //        //{
-            //        //    case 1:
-            //        //        label1.Text += uri1.AbsoluteUri;
-            //        //        break;
-            //        //    case 2:
-            //        //        label1.Text += uri2.AbsoluteUri;
-            //        //        break;
-            //        //    case 3:
-            //        //        label1.Text += uri3.AbsoluteUri;
-            //        //        break;
-            //        //}
-            //        //label1.Text += index + " done\n";
-            //    }
-
-            //    label1.Text += " All done!";
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    label1.Text = "Could not download HTML...";
-            //}
         }
     }
 }
