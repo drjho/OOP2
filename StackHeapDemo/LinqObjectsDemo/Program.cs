@@ -50,11 +50,8 @@ namespace LinqObjectsDemo
             var placeWorkers = workplaces.GroupJoin(persons, w => w.WorkPlaceID, p => p.WorkPlaceID,
                 (w, p) => new { CompanyName = w.CompanyName, Persons = p.Select( e => e.Name)});
 
-            foreach (var item in placeWorkers)
-            {
-                Console.WriteLine(item.CompanyName);
-                Console.WriteLine(string.Join(",", item.Persons));
-            }
+            placeWorkers.Print(e => $"{e.CompanyName}\n {string.Join(",", e.Persons)}");
+
             Console.WriteLine("-----------------");
 
         }
