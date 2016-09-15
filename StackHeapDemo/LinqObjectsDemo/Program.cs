@@ -38,6 +38,11 @@ namespace LinqObjectsDemo
             var persWorkplaces = persons.Join(workplaces, p => p.WorkPlaceID, w => w.WorkPlaceID,
                 (p, w) => new { Name = p.Name, CompanyName = w.CompanyName });
 
+            persWorkplaces = from p in persons
+                             join w in workplaces
+                             on p.WorkPlaceID equals w.WorkPlaceID
+                             select new { Name = p.Name, CompanyName = w.CompanyName };
+
             persWorkplaces.Print(e => $"{e.Name} {e.CompanyName}");
             Console.WriteLine("-----------------");
 

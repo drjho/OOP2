@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncDemo", "AsyncDemo\Asyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqObjectsDemo", "LinqObjectsDemo\LinqObjectsDemo.csproj", "{1EB70727-7607-438C-9996-0ACC33410FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqXMLDemo", "LinqXMLDemo\LinqXMLDemo.csproj", "{F9065E6F-C106-4DFA-92C4-75974A48B051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadXMLDemo", "LoadXMLDemo\LoadXMLDemo.csproj", "{7D945D2E-46B1-4CA5-9340-9FB77220C68F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{1EB70727-7607-438C-9996-0ACC33410FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB70727-7607-438C-9996-0ACC33410FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB70727-7607-438C-9996-0ACC33410FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9065E6F-C106-4DFA-92C4-75974A48B051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9065E6F-C106-4DFA-92C4-75974A48B051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9065E6F-C106-4DFA-92C4-75974A48B051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9065E6F-C106-4DFA-92C4-75974A48B051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D945D2E-46B1-4CA5-9340-9FB77220C68F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D945D2E-46B1-4CA5-9340-9FB77220C68F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D945D2E-46B1-4CA5-9340-9FB77220C68F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D945D2E-46B1-4CA5-9340-9FB77220C68F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
