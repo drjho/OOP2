@@ -11,45 +11,50 @@ namespace LoadXMLDemo
 {
     class Program
     {
-        static XElement xml;
         static XDocument xDoc;
 
         static void Main(string[] args)
         {
             var path = Path.Combine(@"C:\Users\m97_j\Source\Repos\OOP2\StackHeapDemo\LinqXMLDemo\bin\Debug", "authors.xml");
-            Console.WriteLine(path);
             xDoc = XDocument.Load(Path.GetFullPath(path));
-            Console.WriteLine("XDoc read");
-            xml = XElement.Load(File.OpenText(Path.GetFullPath(path)));
-            Console.WriteLine("Xml read");
+            Console.WriteLine($"{path} read");
 
             GetAuthorsBook();
         }
 
         static void GetBooksOfAuthorFromDoc(string name)
         {
-            var titles = xDoc.Descendants("author").SingleOrDefault(a => a.Attribute("name").Value.Contains(name))?.Elements("book").Select(b => b.Attribute("title").Value);
+            
+            var author = xDoc.Descendants("author").FirstOrDefault(a => a.Attribute("name").Value.Contains(name));
+            var titles = author?.Elements("book").Select(b => b.Attribute("title").Value);
             if (titles == null)
             {
                 Console.WriteLine("No such author.");
                 return;
             }
-            Console.WriteLine(" " + string.Join(", ", titles));
+            Console.WriteLine(author.Attribute("name").Value + ": " + string.Join(", ", titles));
+            AskAndRemoveAuthor(author);
         }
 
-        static void GetBooksOfAuthor(string name)
+        static void AskAndRemoveAuthor(XElement author)
         {
             
-            var books = xml.Descendants("author").SingleOrDefault(a => a.Attribute("name").Value.Contains(name))?.Elements("book").Select(b => b.Attribute("title").Value);
-            if (books == null)
+            Console.Write($"Do you want to remove {author.Attribute("name").Value} [y, n]");
+            var key = Console.ReadKey();
+            Console.ReadKey();
+            switch (key.Key)
             {
-                Console.WriteLine("No such author.");
-                return;
+                case ConsoleKey.Y:
+                    author.Remove();
+                    break;
+                case ConsoleKey.N:
+                    Console.WriteLine("No change is made");
+                    break;
+                default:
+                    break;
             }
-            foreach (var item in books)
-            {
-                Console.WriteLine(" " + item);
-            }
+            Console.WriteLine(xDoc);
+
         }
 
         static void GetAuthorsBook()
@@ -60,8 +65,6 @@ namespace LoadXMLDemo
                 var name = Console.ReadLine();
                 if (name.Equals("q"))
                     break;
-                Console.WriteLine("--Results from XElement--:");
-                GetBooksOfAuthor(name);
                 Console.WriteLine("--Results from XDocument--:");
                 GetBooksOfAuthorFromDoc(name);
             }
