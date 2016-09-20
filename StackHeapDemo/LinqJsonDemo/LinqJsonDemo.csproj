@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D945D2E-46B1-4CA5-9340-9FB77220C68F}</ProjectGuid>
+    <ProjectGuid>{CBF7D02C-C1B0-4E31-A2C1-0FB9F2535CAB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoadXMLDemo</RootNamespace>
-    <AssemblyName>LoadXMLDemo</AssemblyName>
+    <RootNamespace>LinqJsonDemo</RootNamespace>
+    <AssemblyName>LinqJsonDemo</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
