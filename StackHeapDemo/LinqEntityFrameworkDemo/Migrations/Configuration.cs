@@ -37,7 +37,7 @@ namespace LinqEntityFrameworkDemo.Migrations
                 b => b.Title,
                 new Entities.Book { AuthorId = 1, Title = "Hitchhikers Guide To The Galaxy"},
                 new Entities.Book { AuthorId = 1, Title = "So Long And Thanks For All The Fish" },
-                new Entities.Book { AuthorId = 1, Title = "Fear And Loathing In Las Vegas" }
+                new Entities.Book { AuthorId = 2, Title = "Fear And Loathing In Las Vegas" }
                 );
         }
     }

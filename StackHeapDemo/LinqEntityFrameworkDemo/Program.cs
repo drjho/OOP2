@@ -14,9 +14,7 @@ namespace LinqEntityFrameworkDemo
         {
             using (var db = new LibraryContext())
             {
-                
-
-                //SearchAuthor(db);
+                SearchAuthor(db);
 
                 //var authors = db.Authors.Select(a => a.Name);
                 //foreach (var item in authors)
@@ -30,7 +28,6 @@ namespace LinqEntityFrameworkDemo
                 //{
                 //    Console.WriteLine(item);
                 //}
-                //var authorBooks = db.Authors.Include(a => a.Books).Where(a => a.Id == 1);
             }
         }
 
@@ -43,18 +40,17 @@ namespace LinqEntityFrameworkDemo
                 if (name.Equals("q"))
                     break;
 
-                var author = db.Authors.Include(a => a.).SingleOrDefault(a => a.Name.Contains(name));
+                var books = db.Authors.GroupJoin(db.Books, a => a.Id, b => b.AuthorId,
+                    (a, b) => new { AuthorName = a.Name, Titles = b.Select(bo => bo.Title) }).SingleOrDefault(a => a.AuthorName.Contains(name));
 
-                //author = db.Authors.SingleOrDefault(a => a.Name.Contains(name));
-
-                //if (author != null)
-                //{
-                //    Console.WriteLine($"{author.Name}: {string.Join(", ", author.Books.Select(b => b.Title))}");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("No such author.");
-                //}
+                if (books != null)
+                {
+                    Console.WriteLine($"{books.AuthorName}: {string.Join(", ", books.Titles)}");
+                }
+                else
+                {
+                    Console.WriteLine("No such author.");
+                }
             }
         }
     }
