@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqJsonDemo", "LinqJsonDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifySearchDemo", "SpotifySearchDemo\SpotifySearchDemo.csproj", "{C3B4E476-F496-479A-AABA-E15D84452C9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqEntityFrameworkDemo", "LinqEntityFrameworkDemo\LinqEntityFrameworkDemo.csproj", "{72FA2902-CFD0-4311-8422-A4FD76E1ACF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{C3B4E476-F496-479A-AABA-E15D84452C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B4E476-F496-479A-AABA-E15D84452C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3B4E476-F496-479A-AABA-E15D84452C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72FA2902-CFD0-4311-8422-A4FD76E1ACF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FA2902-CFD0-4311-8422-A4FD76E1ACF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FA2902-CFD0-4311-8422-A4FD76E1ACF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FA2902-CFD0-4311-8422-A4FD76E1ACF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
