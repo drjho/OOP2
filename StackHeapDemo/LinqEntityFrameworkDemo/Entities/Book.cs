@@ -11,8 +11,6 @@ namespace LinqEntityFrameworkDemo.Entities
         public int Id { get; set; }
         public int AuthorId { get; set; }
         public String Title { get; set; }
-
-        public virtual Author Author { get; set; }
     }
 
 }

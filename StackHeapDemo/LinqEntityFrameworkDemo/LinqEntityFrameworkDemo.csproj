@@ -55,12 +55,29 @@
     <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\LibraryContext.cs" />
+    <Compile Include="Migrations\201609211941066_InitialCreate.cs" />
+    <Compile Include="Migrations\201609211941066_InitialCreate.Designer.cs">
+      <DependentUpon>201609211941066_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609212241205_RemoveBookList.cs" />
+    <Compile Include="Migrations\201609212241205_RemoveBookList.Designer.cs">
+      <DependentUpon>201609212241205_RemoveBookList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609211941066_InitialCreate.resx">
+      <DependentUpon>201609211941066_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609212241205_RemoveBookList.resx">
+      <DependentUpon>201609212241205_RemoveBookList.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
