@@ -27,17 +27,21 @@ namespace LinqEntityFrameworkDemo.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
+            var da = "Douglas Adams";
+            var hst = "Hunter S. Thompson";
             context.Authors.AddOrUpdate(
                 a => a.Name,
-                new Entities.Author { Name = "Douglas Adams" },
-                new Entities.Author { Name = "Hunter S. Thompson" }
+                new Entities.Author { Name = da },
+                new Entities.Author { Name = hst }
                 );
+            context.SaveChanges();
+            var daId = context.Authors.Single(a => a.Name.Equals(da)).Id;
+            var hstId = context.Authors.Single(a => a.Name.Equals(hst)).Id;
             context.Books.AddOrUpdate(
                 b => b.Title,
-                new Entities.Book { AuthorId = 1, Title = "Hitchhikers Guide To The Galaxy"},
-                new Entities.Book { AuthorId = 1, Title = "So Long And Thanks For All The Fish" },
-                new Entities.Book { AuthorId = 2, Title = "Fear And Loathing In Las Vegas" }
+                new Entities.Book { AuthorId = daId, Title = "Hitchhikers Guide To The Galaxy"},
+                new Entities.Book { AuthorId = daId, Title = "So Long And Thanks For All The Fish" },
+                new Entities.Book { AuthorId = hstId, Title = "Fear And Loathing In Las Vegas" }
                 );
         }
     }
