@@ -106,24 +106,39 @@ namespace AsyncDemo
 
             try
             {
-                var t1 = httpClient.GetStringAsync(uri1);
-                var t2 = httpClient.GetStringAsync(uri2);
-                var t3 = httpClient.GetStringAsync(uri3);
+                //var t1 = httpClient.GetStringAsync(uri1);
+                //var t2 = httpClient.GetStringAsync(uri2);
+                //var t3 = httpClient.GetStringAsync(uri3);
 
-                List<Task<string>> tasks = new List<Task<string>>() { t1, t2, t3 };
+                //List<Task<string>> tasks = new List<Task<string>>() { t1, t2, t3 };
 
-                while (tasks.Count > 0)
-                {
-                    Task<string> finishedTask = await Task.WhenAny(tasks);
-                    tasks.Remove(finishedTask);
-                    if (finishedTask.Equals(t1))
-                        label1.Text += uri1.AbsoluteUri;
-                    else if (finishedTask.Equals(t2))
-                        label1.Text += uri2.AbsoluteUri;
-                    else if (finishedTask.Equals(t3))
-                        label1.Text += uri3.AbsoluteUri;
-                    label1.Text += " done \n";
-                }
+                //while (tasks.Count > 0)
+                //{
+                //    Task<string> finishedTask = await Task.WhenAny(tasks);
+                //    tasks.Remove(finishedTask);
+                //    if (finishedTask.Equals(t1))
+                //        label1.Text += uri1.AbsoluteUri;
+                //    else if (finishedTask.Equals(t2))
+                //        label1.Text += uri2.AbsoluteUri;
+                //    else if (finishedTask.Equals(t3))
+                //        label1.Text += uri3.AbsoluteUri;
+                //    label1.Text += " done \n";
+                //}
+
+                // should add async?
+                //GetStringAsync(uri1);
+                //GetStringAsync(uri2);
+                //GetStringAsync(uri3);
+
+
+                await Task.WhenAll(GetStringAsync(uri1), GetStringAsync(uri2), GetStringAsync(uri3));
+                label1.Text += "Done!";
+
+
+                // no async required from here on...
+                //Task.Factory.StartNew(() => GetStringAsync(uri1));
+                //Task.Factory.StartNew(() => GetStringAsync(uri2));
+                //Task.Factory.StartNew(() => GetStringAsync(uri3));
 
             }
 
@@ -132,6 +147,12 @@ namespace AsyncDemo
 
                 label1.Text = "Could not download HTML...";
             }
+        }
+
+        async Task GetStringAsync(Uri uri)
+        {
+            await httpClient.GetStringAsync(uri);
+            label1.Text += uri.AbsoluteUri + "\n";
         }
     }
 }
