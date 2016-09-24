@@ -8,9 +8,9 @@ namespace EventsDemo
 {
     public class NumberGenerator
     {
-        public delegate void EventHandler(object sender, EvenEventArgs e);
+        //public delegate void EventHandler(object sender, EvenEventArgs e);
 
-        public event EventHandler EvenNumberEvent;
+        public event EventHandler<EvenEventArgs> EvenNumberEvent;
 
         Random random = new Random();
 
